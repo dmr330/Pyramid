@@ -360,15 +360,16 @@ public class Prospector : MonoBehaviour
         //SceneManager.LoadScene("__Prospector_Scene_0");
         // Reload the scene in reloadDelay seconds
         // This will give the score a moment to travel
-        Invoke("ReloadLevel", reloadDelay); // a
+        Invoke("ReloadLevel", reloadDelay);
     }
     void ReloadLevel()
     {
         // Reload the scene, resetting the game
         SceneManager.LoadScene("__Prospector_Scene_0");
     }
-    // Return true if the two cards are adjacent in rank (A & K wrap around)
-    public bool AdjacentRank(CardProspector c0, CardProspector c1)
+
+        // Return true if the two cards are adjacent in rank (A & K wrap around)
+        public bool AdjacentRank(CardProspector c0, CardProspector c1)
         {
             // If either card is face-down, it's not adjacent.
             if (!c0.faceUp || !c1.faceUp) return (false);
