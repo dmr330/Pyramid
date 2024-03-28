@@ -109,57 +109,6 @@ public class Prospector : MonoBehaviour {
             layoutAnchor.transform.position = layoutCenter;
         }
 
-        void MoveToDiscard(CardProspector cd) {
-            cd.state = eCardState.discard;
-            discardPile.Add(cd);
-            cd.transform.parent = layoutAnchor;
-
-            cd.transform.localPosition = new Vector3(
-                layout.multiplier.x * layout.discardPile.x,
-                layout.multiplier.y * layout.discardPile.y,
-                -layout.discardPile.layerID + 0.5f);
-
-            cd.faceUp = true;
-            cd.SetSortingLayerName(layout.discardPile.layerName);
-            cd.SetSortOrder(-100 + discardPile.Count);
-        }
-
-        void MoveToTarget(CardProspector cd) {
-            if (target != null) MoveToDiscard(target);
-            target = cd;
-            cd.state = eCardState.target;
-            cd.transform.parent = layoutAnchor;
-
-            cd.transform.localPosition = new Vector3(
-                layout.multiplier.x * layout.discardPile.x,
-                layout.multiplier.y * layout.discardPile.y,
-                -layout.discardPile.layerID);
-
-            cd.faceUp = true;
-            cd.SetSortingLayerName(layout.discardPile.layerName);
-            cd.SetSortOrder(0);
-        }
-
-        void UpdateDrawPile() {
-            CardProspector cd;
-
-            for(int i=0; i<drawPile.Count; i++) {
-                cd = drawPile[i];
-                cd.transform.parent = layoutAnchor;
-
-                Vector2 dpStagger = layout.drawPile.stagger;
-                cd.transform.localPosition = new Vector3(
-                    layout.multiplier.x * (layout.drawPile.x + i * dpStagger.x),
-                    layout.multiplier.y * (layout.drawPile.y + i * dpStagger.y),
-                    -layout.drawPile.layerID + 0.1f * i);
-
-                cd.faceUp = false;
-                cd.state = eCardState.drawpile;
-
-                cd.SetSortingLayerName(layout.drawPile.layerName);
-                cd.SetSortOrder(-10 * i);
-            }
-        }
 
         CardProspector cp;
 
@@ -195,6 +144,58 @@ public class Prospector : MonoBehaviour {
 
     }
 
+    void MoveToDiscard(CardProspector cd) {
+            cd.state = eCardState.discard;
+            discardPile.Add(cd);
+            cd.transform.parent = layoutAnchor;
+
+            cd.transform.localPosition = new Vector3(
+                layout.multiplier.x * layout.discardPile.x,
+                layout.multiplier.y * layout.discardPile.y,
+                -layout.discardPile.layerID + 0.5f);
+
+            cd.faceUp = true;
+            cd.SetSortingLayerName(layout.discardPile.layerName);
+            cd.SetSortOrder(-100 + discardPile.Count);
+        }
+
+        void MoveToTarget(CardProspector cd) {
+            if (target != null) MoveToDiscard(target);
+            target = cd;
+            cd.state = eCardState.target;
+            cd.transform.parent = layoutAnchor;
+
+            cd.transform.localPosition = new Vector3(
+                layout.multiplier.x * layout.discardPile.x,
+                layout.multiplier.y * layout.discardPile.y,
+                -layout.discardPile.layerID);
+
+            cd.faceUp = true;
+            cd.SetSortingLayerName(layout.discardPile.layerName);
+            cd.SetSortOrder(0);
+        }
+
+    void UpdateDrawPile() {
+            CardProspector cd;
+
+            for(int i=0; i<drawPile.Count; i++) {
+                cd = drawPile[i];
+                cd.transform.parent = layoutAnchor;
+
+                Vector2 dpStagger = layout.drawPile.stagger;
+                cd.transform.localPosition = new Vector3(
+                    layout.multiplier.x * (layout.drawPile.x + i * dpStagger.x),
+                    layout.multiplier.y * (layout.drawPile.y + i * dpStagger.y),
+                    -layout.drawPile.layerID + 0.1f * i);
+
+                cd.faceUp = false;
+                cd.state = eCardState.drawpile;
+
+                cd.SetSortingLayerName(layout.drawPile.layerName);
+                cd.SetSortOrder(-10 * i);
+            }
+        }
+
     CardProspector FindCardByLayoutID(int layoutID) {
         foreach(CardProspector tCP in tableau) {
             if (tCP.layoutID == layoutID) {
@@ -215,12 +216,6 @@ public class Prospector : MonoBehaviour {
             cd.faceUp = faceUp;
         }
     }
-
-    void MoveToDiscard(CardProspector cd) { }
-
-    void MoveToTarget(CardProspector cd) { }
-
-    void UpdateDrawPile() { }
 
     public void CardClicked(CardProspector cd) {
         switch (cd.state) {
@@ -312,7 +307,7 @@ public class Prospector : MonoBehaviour {
     }
     void ReloadLevel()
     {
-        SceneManager.LoadScene("__Prospector_Scene_0");
+        SceneManager.LoadScene("__Prospector");
     }
 
     public bool AdjacentRank(CardProspector c0, CardProspector c1)
