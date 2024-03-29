@@ -658,7 +658,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   deckXML: {fileID: 4900000, guid: c76312a0fb08948699e1abf935e4a957, type: 3}
-  layoutXML: {fileID: 4900000, guid: 5e8590209fefa7840af316a13f5dee22, type: 3}
+  layoutXML: {fileID: 4900000, guid: 61f3f05951a2f4d98b35bddbc7549908, type: 3}
   xOffset: 3
   yOffset: -2.5
   layoutCenter: {x: 0, y: 0, z: 0}
@@ -719,8 +719,12 @@ MonoBehaviour:
   - Row1
   - Row2
   - Row3
+  - Row4
+  - Row5
+  - Row6
   - Discard
   - Draw
+  - Available
 --- !u!114 &827460517
 MonoBehaviour:
   m_ObjectHideFlags: 0
